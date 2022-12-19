@@ -17,6 +17,7 @@ export const StyledInput = styled.input`
   height: 60px;
 
   padding: 0px 15px;
+  margin-bottom: 6px;
 
   background-color: var(--color-grey-50);
 
@@ -25,7 +26,7 @@ export const StyledInput = styled.input`
   color: var(--color-grey-600);
 
   ::placeholder {
-    color: var(--color-grey-100);
+    color: var(--color-grey-300);
   }
 
   :focus {
@@ -33,14 +34,14 @@ export const StyledInput = styled.input`
     border-color: var(--color-grey-600);
   }
 
-  /* ${({ color }) => {
+  ${({ color }) => {
     if (color) {
       return css`
-        border: 1px solid var(--color-negative);
+        border: 2px solid var(--color-negative);
         :focus {
           border-color: var(--color-negative);
         }
       `;
     }
-  }} */
+  }}
 `;
