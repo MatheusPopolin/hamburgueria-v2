@@ -1,7 +1,15 @@
 import styled from "styled-components";
 
-interface iTypographyProps{
-  color: "grey-600" | "grey-300" | "grey-100" | "grey-50" | "grey-0" | "primary" | "secondary" 
+interface iTypographyProps {
+  color:
+    | "grey-600"
+    | "grey-300"
+    | "grey-100"
+    | "grey-50"
+    | "grey-0"
+    | "primary"
+    | "secondary"
+    | "negative";
 }
 
 export const Heading1 = styled.h2<iTypographyProps>`
@@ -41,4 +49,3 @@ export const Caption = styled.p<iTypographyProps>`
   line-height: 1rem;
   color: var(--color-${({ color }) => color});
 `;
- 

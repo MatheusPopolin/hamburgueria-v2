@@ -10,7 +10,7 @@ export const Global = createGlobalStyle`
     }
 
     body{
-        background-color: var(--color-grey-4);
+        background-color: var(--color-grey-0);
     }
 
     button{
@@ -20,11 +20,20 @@ export const Global = createGlobalStyle`
     }
 
     img {
-    max-width: 100%;
+        max-width: 100%;
     }
 
     ul {
-    list-style: none;
+        list-style: none;
+    }
+
+    input{
+        border: none;
+    }
+
+    a{
+        text-decoration: none;
+        text-align: center;
     }
 
     :root {
@@ -47,7 +56,7 @@ export const Global = createGlobalStyle`
     --color-information: #155BCB;
 
     --radius-1: 8px;
-    --radius-2: 4px;
+    --radius-2: 5px;
 
     /* Toast Palette */
     --toastify-color-light:   #F5F5F5;  
