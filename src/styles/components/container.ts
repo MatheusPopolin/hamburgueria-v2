@@ -12,7 +12,7 @@ export const Container = styled.div`
   align-items: center;
 `;
 
-export const ContainerDashboard = styled.div`
+export const ContainerHome = styled.div`
   width: 100vw;
   max-width: 1368px;
 

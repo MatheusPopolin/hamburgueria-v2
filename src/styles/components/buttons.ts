@@ -15,7 +15,7 @@ export const StyledButton = styled.button<iStyledButtonProps>`
         `;
       case "medium":
         return css`
-          height: 32px;
+          height: 40px;
         `;
     }
   }};
