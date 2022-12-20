@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { api } from "../../services/api";
@@ -16,6 +16,26 @@ export const UserProvider = ({ children }: iUserContextProps) => {
   const navigate = useNavigate();
 
   const [user, setUser] = useState<iUser | null>(null);
+  const [userLoading, setUserLoading] = useState(true);
+
+  useEffect(() => {
+    const token = window.localStorage.getItem("@BurguerKenzie:Token");
+    (async () => {
+      try {
+        const response = await api.get("products", {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        });
+        setUserLoading(false);
+        navigate("/homepage");
+      } catch (error) {
+        window.localStorage.removeItem("@BurguerKenzie:Token");
+        setUserLoading(false);
+        navigate("/");
+      }
+    })();
+  }, []);
 
   const userLogin = async (
     formData: iFormLoginData,
@@ -62,7 +82,7 @@ export const UserProvider = ({ children }: iUserContextProps) => {
   };
 
   return (
-    <UserContext.Provider value={{ user, setUser, userLogin, userRegister }}>
+    <UserContext.Provider value={{ user, setUser, userLogin, userRegister, userLoading }}>
       {children}
     </UserContext.Provider>
   );
