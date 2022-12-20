@@ -6,7 +6,7 @@ export const StyledFindInput = styled.div`
   height: 60px;
 
   position: relative;
-  
+
   border-radius: var(--radius-1);
 
   > input {
@@ -32,11 +32,12 @@ export const StyledFindInput = styled.div`
     }
   }
 
-  > button{
+  > button {
     position: absolute;
     top: 10px;
     right: 10px;
 
     width: 54px;
+    height: 40px;
   }
 `;
