@@ -2,7 +2,13 @@ import React, { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { api } from "../../services/api";
-import { iUserContext, iUserContextProps, iUser, iFormLoginData } from "./@types";
+import {
+  iUserContext,
+  iUserContextProps,
+  iUser,
+  iFormLoginData,
+  iFormRegisterData,
+} from "./@types";
 
 export const UserContext = createContext({} as iUserContext);
 
@@ -19,7 +25,10 @@ export const UserProvider = ({ children }: iUserContextProps) => {
       setLoading(true);
       const response = await api.post("login", formData);
       setUser(response.data.user);
-      window.localStorage.setItem("@BurguerKenzie:Token", response.data.token);
+      window.localStorage.setItem(
+        "@BurguerKenzie:Token",
+        response.data.accessToken
+      );
       toast.success("Login bem sucedido");
       setTimeout(() => navigate("/homepage"), 1000);
     } catch (error) {
@@ -29,8 +38,31 @@ export const UserProvider = ({ children }: iUserContextProps) => {
     }
   };
 
+  const userRegister = async (
+    formData: iFormRegisterData,
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>
+  ) => {
+    const { name, email, password } = formData;
+    const userData = {
+      name: name,
+      email: email,
+      password: password,
+    };
+    try {
+      setLoading(true);
+      const response = await api.post("users", userData);
+      setUser(response.data.user);
+      toast.success("Cadastro bem sucedido");
+      setTimeout(() => navigate("/"), 1000);
+    } catch (error) {
+      toast.error("Email já cadastrado");
+    } finally {
+      setTimeout(() => setLoading(false), 1000);
+    }
+  };
+
   return (
-    <UserContext.Provider value={{ user, setUser, userLogin }}>
+    <UserContext.Provider value={{ user, setUser, userLogin, userRegister }}>
       {children}
     </UserContext.Provider>
   );
