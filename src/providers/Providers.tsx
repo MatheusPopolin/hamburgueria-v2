@@ -1,3 +1,4 @@
+import { CartProvider } from "./CartContext/CartContext";
 import { UserProvider } from "./UserContext/UserContext";
 
 interface iProviderProps {
@@ -5,5 +6,9 @@ interface iProviderProps {
 }
 
 export const Providers = ({ children }: iProviderProps) => {
-  return <UserProvider>{children}</UserProvider>;
+  return (
+    <UserProvider>
+      <CartProvider>{children}</CartProvider>
+    </UserProvider>
+  );
 };
