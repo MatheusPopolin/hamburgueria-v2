@@ -5,6 +5,10 @@ export interface iUserContext {
     formData: iFormLoginData,
     setLoading: React.Dispatch<React.SetStateAction<boolean>>
   ) => void;
+  userRegister: (
+    formData: iFormRegisterData,
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>
+  ) => void;
 }
 
 export interface iUserContextProps {
@@ -20,4 +24,11 @@ export interface iUser {
 export interface iFormLoginData {
   email: string;
   password: string;
+}
+
+export interface iFormRegisterData {
+  name: string;
+  email: string;
+  password: string;
+  password_confirm: string;
 }
