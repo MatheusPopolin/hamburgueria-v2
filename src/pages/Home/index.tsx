@@ -1,4 +1,9 @@
+import { useContext } from "react";
+import { UserContext } from "../../providers/UserContext/UserContext";
+
 import { useState } from "react";
+
+import { useNavigate } from "react-router-dom";
 
 import { StyledHome } from "./style";
 import { ContainerHome } from "../../styles/components/container";
@@ -13,9 +18,20 @@ import { StyledButton } from "../../styles/components/buttons";
 import { ProductsList } from "../../components/ProductsList";
 
 export const HomePage = () => {
+  const { userLoading } = useContext(UserContext);
+
   const [showFindInput, setShowFindInput] = useState(false);
 
-  return (
+  const navigate = useNavigate()
+
+  const logout = ()=>{
+    localStorage.removeItem("@BurguerKenzie:Token")
+    navigate("/")
+  }
+
+  return userLoading ? (
+    <></>
+  ) : (
     <StyledHome>
       <header>
         <ContainerHome>
@@ -37,7 +53,7 @@ export const HomePage = () => {
             <button>
               <img src={Cart} alt="Abrir carrinho" />
             </button>
-            <button>
+            <button onClick={logout}>
               <img src={Exit} alt="Sair" />
             </button>
           </div>

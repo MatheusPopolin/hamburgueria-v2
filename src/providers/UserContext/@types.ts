@@ -9,6 +9,7 @@ export interface iUserContext {
     formData: iFormRegisterData,
     setLoading: React.Dispatch<React.SetStateAction<boolean>>
   ) => void;
+  userLoading: boolean
 }
 
 export interface iUserContextProps {

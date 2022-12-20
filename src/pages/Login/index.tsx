@@ -1,3 +1,6 @@
+import { useContext } from "react";
+import { UserContext } from "../../providers/UserContext/UserContext";
+
 import { StyledLoginPage } from "./style";
 import { Container } from "../../styles/components/container";
 import Logo from "../../assets/logo.jpg";
@@ -6,7 +9,11 @@ import Circles from "../../assets/circlesGroup.svg";
 import { FormLogin } from "../../components/FormLogin";
 
 export const LoginPage = () => {
-  return (
+  const { userLoading } = useContext(UserContext);
+
+  return userLoading ? (
+    <></>
+  ) : (
     <StyledLoginPage>
       <Container>
         <div>
