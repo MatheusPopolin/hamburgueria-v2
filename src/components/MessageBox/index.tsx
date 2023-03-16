@@ -1,5 +1,5 @@
 import { StyledMessageBox } from "./style";
-import ShopingBag from "../../assets/ShoppingBag.svg";
+import ShopingBag from "../../assets/shoppingBag.svg";
 import { Headline } from "../../styles/components/typography";
 
 export const MessageBox = () => {
