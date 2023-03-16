@@ -3,7 +3,7 @@ import { UserContext } from "../../providers/UserContext/UserContext";
 
 import { StyledLoginPage } from "./style";
 import { Container } from "../../styles/components/container";
-import Logo from "../../assets/logo.jpg";
+import Logo from "../../assets/logo.png";
 import { MessageBox } from "../../components/MessageBox";
 import Circles from "../../assets/circlesGroup.svg";
 import { FormLogin } from "../../components/FormLogin";

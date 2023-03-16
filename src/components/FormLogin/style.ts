@@ -46,7 +46,7 @@ export const StyledFormLogin = styled.form`
     background-color: var(--color-grey-100);
     color: var(--color-grey-300);
 
-    &:hover {
+    :hover {
       background-color: var(--color-grey-300);
       color: var(--color-grey-100);
     }

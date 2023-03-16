@@ -36,7 +36,7 @@ export const StyledButton = styled.button<iStyledButtonProps>`
           background-color: var(--color-primary);
           color: var(--color-grey-0);
 
-          &:hover {
+          :hover {
             opacity: 0.5;
           }
         `;
@@ -45,7 +45,7 @@ export const StyledButton = styled.button<iStyledButtonProps>`
           background-color: var(--color-grey-100);
           color: var(--color-grey-300);
 
-          &:hover {
+          :hover {
             background-color: var(--color-grey-300);
             color: var(--color-grey-100);
           }
