@@ -1,16 +1,19 @@
 import { createContext, useState } from "react";
+
 import {
   iAddProduct,
   iCartContext,
   iCartProviderProps,
   iProduct,
 } from "./@types";
+
 import { toast } from "react-toastify";
 
 export const CartContext = createContext({} as iCartContext);
 
 export const CartProvider = ({ children }: iCartProviderProps) => {
   const [cart, setCart] = useState<iProduct[]>([]);
+
   const [cartIsOpen, setCartIsOpen] = useState<boolean>(false);
 
   const addToCart = (product: iAddProduct) => {
@@ -21,6 +24,7 @@ export const CartProvider = ({ children }: iCartProviderProps) => {
       setCart([...newCart, find]);
     } else {
       const { id, name, price, category, img } = product;
+
       const addProduct = {
         id: id,
         name: name,
