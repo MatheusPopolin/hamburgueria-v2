@@ -32,7 +32,7 @@ export const Cart = () => {
         <>
           <ul>
             {cart.map((product) => (
-              <Product product={product} />
+              <Product key={product.id} product={product} />
             ))}
           </ul>
           <div className="cartTotal">
