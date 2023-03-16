@@ -1,69 +1,83 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { UserContext } from "../../providers/UserContext/UserContext";
+import { CartContext } from "../../providers/CartContext/CartContext";
+
+import { iProduct } from "../../providers/CartContext/@types";
 
 import { useState } from "react";
 
-import { useNavigate } from "react-router-dom";
+import { api } from "../../services/api";
 
-import { StyledHome } from "./style";
 import { ContainerHome } from "../../styles/components/container";
-
-import Logo from "../../assets/logo.jpg";
-import Find from "../../assets/find.svg";
-import Cart from "../../assets/cart.svg";
-import Exit from "../../assets/exit.svg";
-
-import { StyledFindInput } from "../../components/FindInput/style";
 import { StyledButton } from "../../styles/components/buttons";
 import { ProductsList } from "../../components/ProductsList";
+import { Cart } from "../../components/Cart";
+import { Heading2 } from "../../styles/components/typography";
+import { Header } from "../../components/Header";
+import { StyledHome } from "./style";
 
 export const HomePage = () => {
   const { userLoading } = useContext(UserContext);
+  const { cartIsOpen } = useContext(CartContext);
 
-  const [showFindInput, setShowFindInput] = useState(false);
+  const [products, setProducts] = useState<iProduct[] | null>(null);
+  const [filteredWord, setFilteredWord] = useState<string>("");
+  const [filteredProducts, setFilteredProducts] = useState<iProduct[]>([]);
 
-  const navigate = useNavigate()
+  useEffect(() => {
+    (async () => {
+      try {
+        const token = localStorage.getItem("@BurguerKenzie:Token");
+        const response = await api.get("products", {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        });
+        setProducts(response.data);
+        setFilteredProducts(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, []);
 
-  const logout = ()=>{
-    localStorage.removeItem("@BurguerKenzie:Token")
-    navigate("/")
-  }
+  useEffect(() => {
+    if (products) {
+      const find = products.filter((product) => {
+        return (
+          product.name.toLowerCase().includes(filteredWord.toLowerCase()) ||
+          product.category.toLowerCase().includes(filteredWord.toLowerCase())
+        );
+      });
+      setFilteredProducts(find);
+    }
+  }, [filteredWord]);
 
   return userLoading ? (
     <></>
   ) : (
     <StyledHome>
-      <header>
-        <ContainerHome>
-          <img src={Logo} alt="Burguer Kenzie" />
-          <div className="headerRight">
-            {!showFindInput && (
-              <button>
-                <img src={Find} alt="Barra de pesquisa" />
-              </button>
-            )}
-            {showFindInput && (
-              <StyledFindInput>
-                <input type="text" />
-                <StyledButton size="medium" color="primary">
-                  <img src={Find} alt="Pesquisar" />
-                </StyledButton>
-              </StyledFindInput>
-            )}
-            <button>
-              <img src={Cart} alt="Abrir carrinho" />
-            </button>
-            <button onClick={logout}>
-              <img src={Exit} alt="Sair" />
-            </button>
-          </div>
-        </ContainerHome>
-      </header>
+      <Header filteredWord={filteredWord} setFilteredWord={setFilteredWord} />
       <ContainerHome>
         <main>
-          <ProductsList />
+          {filteredWord && (
+            <div className="findRespost">
+              <Heading2 color="grey-600">
+                Resultados para: {filteredWord}
+              </Heading2>
+              <StyledButton
+                onClick={() => setFilteredWord("")}
+                color="primary"
+                size="medium"
+              >
+                Limpar Busca
+              </StyledButton>
+            </div>
+          )}
+          <ProductsList products={filteredProducts} />
         </main>
       </ContainerHome>
+      {cartIsOpen && <Cart />}
     </StyledHome>
   );
 };

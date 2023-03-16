@@ -1,5 +1,3 @@
-import { useState, useEffect } from "react";
-import { api } from "../../services/api";
 import { StyledProductsList } from "./style";
 import { Product } from "./Product";
 
@@ -11,25 +9,11 @@ interface iProduct {
   img: string;
 }
 
-export const ProductsList = () => {
-  const [products, setProducts] = useState<iProduct[] | null>(null);
+interface iProductListProps {
+  products: iProduct[];
+}
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const token = localStorage.getItem("@BurguerKenzie:Token");
-        const response = await api.get("products", {
-          headers: {
-            authorization: `Bearer ${token}`,
-          },
-        });
-        setProducts(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  }, []);
-
+export const ProductsList = ({ products }: iProductListProps) => {
   return (
     <StyledProductsList>
       {products?.map((product) => {

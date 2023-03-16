@@ -14,5 +14,6 @@ export const StyledProductsList = styled.ul`
 
     overflow: unset;
     flex-wrap: wrap;
+    justify-content: center;
   }
 `;
