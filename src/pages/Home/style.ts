@@ -1,11 +1,15 @@
 import styled from "styled-components";
 
 export const StyledHome = styled.div`
+  height: 100vh;
+
   main {
-    margin-top: 124px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
+      height: 100%;
+    padding-top: 100px;
+  }
+
+  main > div {
+    height: 100%;
     gap: 20px;
   }
 

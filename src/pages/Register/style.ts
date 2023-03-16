@@ -1,6 +1,12 @@
 import styled from "styled-components";
 
 export const StyledRegisterPage = styled.div`
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
   padding: 40px 0;
 
   > div {

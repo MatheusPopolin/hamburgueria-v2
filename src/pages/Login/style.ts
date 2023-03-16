@@ -1,6 +1,12 @@
 import styled from "styled-components";
 
 export const StyledLoginPage = styled.div`
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
   padding: 40px 0;
 
   > div {
@@ -25,7 +31,7 @@ export const StyledLoginPage = styled.div`
 
   @media (min-width: 900px) {
     > div {
-      flex-direction: row;
+      flex-direction: row-reverse;
       justify-content: space-between;
     }
 

@@ -39,20 +39,20 @@ export const CartProvider = ({ children }: iCartProviderProps) => {
   };
 
   const upCount = (productId: number) => {
-    const find = cart.find((e) => e.id === productId);
-    find!.counter++;
-    const newCart = cart.filter((cartProduct) => cartProduct.id !== find!.id);
-    setCart([...newCart, find!]);
+    const findIndex = cart.findIndex((e) => e.id === productId);
+    let newCart: iProduct[] = [...cart];
+    newCart[findIndex].counter++;
+    setCart(newCart);
   };
 
   const downCount = (productId: number) => {
-    const find = cart.find((e) => e.id === productId);
-    find!.counter--;
-    if (find!.counter === 0) {
+    const findIndex = cart.findIndex((e) => e.id === productId);
+    let newCart: iProduct[] = [...cart];
+    newCart[findIndex].counter--;
+    if (newCart[findIndex].counter === 0) {
       removeProduct(productId);
     } else {
-      const newCart = cart.filter((cartProduct) => cartProduct.id !== find!.id);
-      setCart([...newCart, find!]);
+      setCart(newCart);
     }
   };
 

@@ -58,8 +58,8 @@ export const HomePage = () => {
   ) : (
     <StyledHome>
       <Header filteredWord={filteredWord} setFilteredWord={setFilteredWord} />
-      <ContainerHome>
-        <main>
+      <main>
+        <ContainerHome>
           {filteredWord && (
             <div className="findRespost">
               <Heading2 color="grey-600">
@@ -75,8 +75,8 @@ export const HomePage = () => {
             </div>
           )}
           <ProductsList products={filteredProducts} />
-        </main>
-      </ContainerHome>
+        </ContainerHome>
+      </main>
       {cartIsOpen && <Cart />}
     </StyledHome>
   );
